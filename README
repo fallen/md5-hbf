@@ -2,3 +2,5 @@ md5 hardware brutforcer IP core
 
 (c) Yann Sionneau <yann@minet.net>
 (c) Guillaume Rose <mrfreeze@minet.net>
+
+we use the pancham MD5 IP core made by Swapnajit Mittra <http://www.angelfire.com/ca/verilog>
