@@ -151,12 +151,4 @@ begin
 		end
 end
 
-always @(posedge clk)
-begin
-	if (m_out_val)
-		begin
-			$display("%h", m_out);
-		end
-end
-
 endmodule
