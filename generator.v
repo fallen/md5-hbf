@@ -10,6 +10,7 @@ reg	[3:0] state = 4'b0;
 bram bram1 (clk, we, a, di, do);
 
 reg	[0:127] m_in = 128'd0;
+reg	[0:127] m_in_buff = 128'd0;
 reg	[0:7]	m_in_w = 8'd0;
 reg	m_in_valid = 0;
 
@@ -51,6 +52,7 @@ parameter s8 = 4'd7;
 parameter s9 = 4'd8;
 parameter s10 = 4'd9;
 parameter s11 = 4'd10;
+parameter found = 4'd11;
 
 always @(posedge clk or posedge reset)
 begin
@@ -62,6 +64,7 @@ begin
 			j <= 48'b0;
 			m_in_valid <= 0;
 			m_in_w <= 8'd64;
+			m_in_buff <= 128'd0;
 		end
 	else
 		begin
@@ -72,57 +75,77 @@ begin
 					m_in_valid <= 0;
 				end
 			s2:	begin
-					m_in[120:127] <= do;
+					m_in_buff[64:71] <= do;
 					a <= { 5'b0, j[17:12] };
 					state <= s3;
 				end
 			s3:	begin
-					m_in[112:119] <= do;
+					m_in_buff[72:79] <= do;
 					a <= { 5'b0, j[23:18] };
 					state <= s4;
 				end
 			s4:	begin
-					m_in[104:111] <= do;
+					m_in_buff[80:87] <= do;
 					a <= { 5'b0, j[29:24] };
 					state <= s5;
 				end
 			s5:	begin
-					m_in[96:103] <= do;
+					m_in_buff[88:95] <= do;
 					a <= { 5'b0, j[35:30] };
 					state <= s6; 
 				end
 			s6:	begin
-					m_in[88:95] <= do;
+					m_in_buff[96:103] <= do;
 					a <= { 5'b0, j[41:36] };
 					state <= s7;
 				end
 			s7:	begin
-					m_in[80:87] <= do;
+					m_in_buff[104:111] <= do;
 					a <= { 5'b0, j[47:42] };
 					state <= s8;
 				end
 			s8:	begin
-					m_in[72:79] <= do;
+					m_in_buff[112:119] <= do;
 					state <= s9;
 				end
 			s9:	begin
-					m_in[64:71] <= do;
+					m_in_buff[120:127] <= do;
 					state <= s10;
 					j <= j + 1;
 				end
 			s10:	begin
-					if (md5_ready)
+					if (m_out_val)
 						begin
-							$display("md5(%h) = ", m_in);
-							m_in_w <= 8'd64;
-							m_in_valid <= 1;
-							state <= s1;
-							a <= { 5'b0, j[5:0] };
+							$display("md5(%s) = %h", m_in, m_out);
+							if (m_out == 128'h82cf9fa647dd1b3fbd9de71bbfb83fb2)
+								begin
+									state <= found;
+									led_reg <= 1;
+									$display("MD5 HASH FOUND");
+								end
+							else
+								begin
+									state <= s10;
+								end
 						end
 					else
 						begin
-							state <= s10;
+						if (md5_ready)
+							begin
+								m_in_w <= 8'd64;
+								m_in_valid <= 1;
+								m_in <= m_in_buff;
+								state <= s1;
+								a <= { 5'b0, j[5:0] };
+							end
+						else
+							begin
+								state <= s10;
+							end
 						end
+				end
+			found:	begin
+					state <= found;
 				end
 			endcase
 		end
