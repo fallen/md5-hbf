@@ -1,4 +1,4 @@
 #!/bin/sh
-iverilog -o design simulation/top.v pancham.v pancham_round.v generator.v bram.v
+iverilog -o design simulation/top.v pancham.v pancham_round.v generator.v bram.v usart.v
 vvp design
 echo "You can now launch gtkwave test.vcd to watch waveforms"

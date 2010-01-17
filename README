@@ -4,3 +4,12 @@ md5 hardware brutforcer IP core
 (c) Guillaume Rose <mrfreeze@minet.net>
 
 we use the pancham MD5 IP core made by Swapnajit Mittra <http://www.angelfire.com/ca/verilog>
+
+Synthesis : 
+
+It has been synthetized successfully for Spartan-3A XC3S400A
+on the AVNET Spartan-3A fpga dev board.
+
+Simulation : 
+
+it has been tested using iverilog and vvp

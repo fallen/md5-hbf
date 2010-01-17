@@ -2,17 +2,21 @@ module top;
 
 reg clk = 0;
 wire led;
+wire tx_led;
 reg reset = 1;
 
-always #1 clk = ~clk;
+wire tx;
 
-generator g1 (clk, reset, led);
+
+always #31 clk = ~clk;
+
+generator g1 (clk, reset, led, tx_led, tx);
 
 initial begin
 	reset = 1;
-	#10
+	#32
 	reset = 0;
-	#10000
+	#1000000
 	$stop;
 	$finish;
 end

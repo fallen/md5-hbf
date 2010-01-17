@@ -1,4 +1,4 @@
-module generator(input clk, input reset, output led);
+module generator(input clk, input reset, output led, output tx_led, output tx);
 
 reg	[10:0] a = 11'b0;
 reg	we = 0;
@@ -20,6 +20,10 @@ wire	md5_ready;
 
 reg	led_reg = 0;
 
+wire	[7:0] bytetosend;
+wire	sent;
+reg	send;
+
 pancham md5(
 	.clk(clk),
 	.reset(reset),
@@ -31,6 +35,8 @@ pancham md5(
 	.ready(md5_ready)
 	);
 	
+usart usart1 (clk, reset, tx_led, bytetosend, send, sent, tx); 
+
 
 assign led = led_reg;
 
