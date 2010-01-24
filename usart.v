@@ -7,7 +7,7 @@ module usart(input clock, input reset, output tx_led, input [7:0] bytetosend, in
 
 	parameter fsm_clk_freq = 16000000;
 	parameter baud_rate = 115200;
-	parameter fsm_clk_divider = fsm_clk_freq/baud_rate/16; 
+	parameter fsm_clk_divider = fsm_clk_freq/baud_rate; 
 	parameter IDLE = 4'b0;
 	parameter START_BIT = 4'd1;
 	parameter BIT_ONE = 4'd2;
