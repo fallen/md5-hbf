@@ -1,13 +1,13 @@
 module usart(input clock, input reset, output tx_led, input [7:0] bytetosend, input send, output sent, output tx);
 
-	reg	[15:0] clk_count = 16'b0;
-	wire	clk;
+	reg	[15:0] fsm_clk_count = 16'b0;
+	wire	fsm_clk;
 	reg 	[3:0] state = 4'b0;
 	reg	tx_reg = 1;
 
-	parameter clk_freq = 16000000;
+	parameter fsm_clk_freq = 16000000;
 	parameter baud_rate = 115200;
-	parameter clk_divider = clk_freq/baud_rate/16; 
+	parameter fsm_clk_divider = fsm_clk_freq/baud_rate/16; 
 	parameter IDLE = 4'b0;
 	parameter START_BIT = 4'd1;
 	parameter BIT_ONE = 4'd2;
@@ -24,21 +24,21 @@ module usart(input clock, input reset, output tx_led, input [7:0] bytetosend, in
 
 	wire	[7:0] bytetosend;
 
-	assign clk = (clk_count == 16'd0);
+	assign fsm_clk = (fsm_clk_count == 16'd0);
 	assign tx_led = sent;
 	assign tx = tx_reg;
-	assign sent = (state == STOP_BIT2);
+	assign sent = (state == IDLE);
 
 
 	always @(posedge clock)
 	begin
-		if (reset)
-			clk_count <= clk_divider - 16'b1;
+		if (reset | send)
+			fsm_clk_count <= fsm_clk_divider - 16'b1;
 		else 
 		begin
-			clk_count <= clk_count - 16'd1;
-			if (clk)
-				clk_count <= clk_divider - 16'b1;
+			fsm_clk_count <= fsm_clk_count - 16'd1;
+			if (fsm_clk)
+				fsm_clk_count <= fsm_clk_divider - 16'b1;
 		end
 		
 	end
@@ -52,22 +52,14 @@ module usart(input clock, input reset, output tx_led, input [7:0] bytetosend, in
 			tx_reg <= 1'b1;
 		end
 		else
-			if (clk) 
+			if (send & sent)
+			begin
+				state <= START_BIT;
+				tx_reg <= 1'b0;
+			end
+			else if (fsm_clk & ~sent) 
 			begin
 				case(state)
-				IDLE:		begin
-							if (send)
-							begin
-								state <= START_BIT;
-								tx_reg <= 1'b0;
-							end
-							else
-							begin
-								state <= IDLE;
-								tx_reg <= 1'b1;
-							end
-						end
-
 				START_BIT:	begin
 							tx_reg <= bytetosend[0];
 							state <= BIT_ONE;
