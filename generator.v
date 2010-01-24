@@ -161,7 +161,7 @@ end
 wire 	result_displayed;
 reg	[7:0] tmp;
 reg	[3:0] show_result_count = 4'b0;
-assign result_displayed = (show_result_count == 8);
+assign result_displayed = (show_result_count == 4'd8);
 
 	always @(posedge clk)
 	begin
@@ -171,16 +171,19 @@ assign result_displayed = (show_result_count == 8);
 		begin
 			if (state == found)
 			begin
-				if (~result_displayed & sent)
+				if (~result_displayed & sent & ~send)
 					begin
-						tmp <= m_in[64:71];
 						m_in <= { 56'b0 , m_in[72:127] , tmp };
 						bytetosend <= tmp;
 						send <= 1'b1;
 						show_result_count <= show_result_count + 1;
+//						$display("tmp = %h, m_in = %h, bytetosend = %h, send = %b", tmp, m_in[64:127], bytetosend, send);
 					end 	
 				if (send)
+				begin
+					tmp <= m_in[64:71];
 					send <= 1'b0;
+				end
 			end
 		end
 	end
