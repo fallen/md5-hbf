@@ -20,7 +20,7 @@ wire	md5_ready;
 
 reg	led_reg = 0;
 
-wire	[7:0] bytetosend;
+reg	[7:0] bytetosend;
 wire	sent;
 reg	send;
 
@@ -128,6 +128,7 @@ begin
 									state <= found;
 									led_reg <= 1;
 									$display("MD5 HASH FOUND");
+									tmp <= m_in[64:71];
 								end
 							else
 								begin
@@ -156,5 +157,32 @@ begin
 			endcase
 		end
 end
+
+wire 	result_displayed;
+reg	[7:0] tmp;
+reg	[3:0] show_result_count = 4'b0;
+assign result_displayed = (show_result_count == 8);
+
+	always @(posedge clk)
+	begin
+		if (reset)
+			send <= 1'b0;
+		else
+		begin
+			if (state == found)
+			begin
+				if (~result_displayed & sent)
+					begin
+						tmp <= m_in[64:71];
+						m_in <= { 56'b0 , m_in[72:127] , tmp };
+						bytetosend <= tmp;
+						send <= 1'b1;
+						show_result_count <= show_result_count + 1;
+					end 	
+				if (send)
+					send <= 1'b0;
+			end
+		end
+	end
 
 endmodule
