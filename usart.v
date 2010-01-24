@@ -56,6 +56,7 @@ module usart(input clock, input reset, output tx_led, input [7:0] bytetosend, in
 			begin
 				state <= START_BIT;
 				tx_reg <= 1'b0;
+				$display("sending: %h", bytetosend);
 			end
 			else if (fsm_clk & ~sent) 
 			begin
