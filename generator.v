@@ -24,6 +24,9 @@ reg	[7:0] bytetosend;
 wire	sent;
 reg	send;
 
+reg	[7:0] tmp;
+reg	[7:0] tmp2;
+
 pancham md5(
 	.clk(clk),
 	.reset(reset),
@@ -165,9 +168,9 @@ begin
 end
 
 wire 	result_displayed;
-reg	[7:0] tmp;
 reg	[3:0] show_result_count = 4'b0;
 assign result_displayed = (show_result_count == 4'd8);
+reg	[0:127] cleartext;
 
 	always @(posedge clk)
 	begin
@@ -178,16 +181,30 @@ assign result_displayed = (show_result_count == 4'd8);
 			if (state == found)
 			begin
 				if (~result_displayed & sent & ~send)
+				begin
+					if (show_result_count == 4'd0)
 					begin
-						m_in <= { 56'b0 , m_in[72:127] , tmp };
+						tmp2 <= tmp;
+						cleartext <= { 56'b0, m_in[72:127], tmp };
 						bytetosend <= tmp;
-						send <= 1'b1;
-						show_result_count <= show_result_count + 1;
-//						$display("tmp = %h, m_in = %h, bytetosend = %h, send = %b", tmp, m_in[64:127], bytetosend, send);
-					end 	
+					end
+					else
+					begin
+						cleartext <= { 56'b0 , cleartext[72:127] , tmp2 };
+						bytetosend <= tmp2;
+					end
+					send <= 1'b1;
+					show_result_count <= show_result_count + 1;
+`ifdef SIMULATION
+`ifdef MAXDEBUG
+					$display("tmp = %h, m_in = %h, bytetosend = %h, send = %b", tmp, m_in[64:127], bytetosend, send);
+					$display("tmp2 = %h, cleartext = %h, bytetosend = %h, send = %b", tmp, cleartext[64:127], bytetosend, send);
+`endif
+`endif
+				end 	
 				if (send)
 				begin
-					tmp <= m_in[64:71];
+					tmp2 <= cleartext[64:71];
 					send <= 1'b0;
 				end
 			end
