@@ -43,8 +43,10 @@ assign led = led_reg;
 
 initial begin
 	state = 0;
+`ifdef SIMULATION
 	$dumpfile("top.vcd");
 	$dumpvars(0, top);
+`endif
 end
 
 parameter s1 = 4'd0;
@@ -122,12 +124,16 @@ begin
 			s10:	begin
 					if (m_out_val)
 						begin
+`ifdef SIMULATION
 							$display("md5(%s) = %h", m_in, m_out);
+`endif
 							if (m_out == 128'h82cf9fa647dd1b3fbd9de71bbfb83fb2)
 								begin
 									state <= found;
 									led_reg <= 1;
+`ifdef SIMULATION
 									$display("MD5 HASH FOUND");
+`endif
 									tmp <= m_in[64:71];
 								end
 							else
