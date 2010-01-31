@@ -21,9 +21,6 @@ module usart(input clock, input reset, output tx_led, input [7:0] bytetosend, in
 	parameter STOP_BIT = 4'd10;
 	parameter STOP_BIT2 = 4'd11;
 
-
-	wire	[7:0] bytetosend;
-
 	assign fsm_clk = (fsm_clk_count == 16'd0);
 	assign tx_led = sent;
 	assign tx = tx_reg;
