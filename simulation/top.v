@@ -11,8 +11,14 @@ wire tx;
 
 
 always #31 clk = ~clk;
+reg reset_sync;
 
-generator g1 (clk, reset, led, tx_led, tx);
+always @(posedge clk)
+begin
+	reset_sync <= reset;
+end
+
+generator g1 (clk, reset_sync, led, tx_led, tx);
 
 initial begin
 	reset = 1;
