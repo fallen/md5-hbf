@@ -84,7 +84,7 @@ NET clock           LOC = C10   | IOSTANDARD = LVCMOS33               ;   # CLK_
 #NET FPGA_RESET          LOC = H4    | IOSTANDARD = LVCMOS33               ;   # FPGA_RESET
 NET reset         LOC = K3    | IOSTANDARD = LVCMOS33               ;   # FPGA_PUSH_A
 #NET FPGA_PUSH_B         LOC = H5    | IOSTANDARD = LVCMOS33               ;   # FPGA_PUSH_B
-#NET FPGA_PUSH_C         LOC = L3    | IOSTANDARD = LVCMOS33               ;   # FPGA_PUSH_C
+NET rewind_usart         LOC = L3    | IOSTANDARD = LVCMOS33               ;   # FPGA_PUSH_C
 NET led                LOC = D14   | IOSTANDARD = LVCMOS33               ;   # LED1
 NET led2                LOC = C16   | IOSTANDARD = LVCMOS33               ;   # LED2
 NET led3                LOC = C15   | IOSTANDARD = LVCMOS33               ;   # LED3

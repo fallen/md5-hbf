@@ -1,4 +1,4 @@
-module generator(input clk, input reset, output led, output tx_led, output tx);
+module generator(input clk, input reset, output led, output tx_led, output tx, input rewind_usart);
 
 reg	[10:0] a = 11'b0;
 reg	we = 0;
@@ -169,7 +169,7 @@ end
 
 wire 	result_displayed;
 reg	[3:0] show_result_count = 4'b0;
-assign result_displayed = (show_result_count == 4'd8);
+assign result_displayed = (rewind_usart ? 4'd0 : show_result_count == 4'd8);
 reg	[0:127] cleartext;
 
 	always @(posedge clk)
