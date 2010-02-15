@@ -129,8 +129,10 @@ begin
 						begin
 `ifdef SIMULATION
 							$display("md5(%s) = %h", m_in, m_out);
-`endif
 							if (m_out == 128'h82cf9fa647dd1b3fbd9de71bbfb83fb2)
+`else
+							if (m_out == 128'haef656fe0f5a36d58ae1029630ba25e2)
+`endif
 								begin
 									state <= found;
 									led_reg <= 1;
