@@ -26,10 +26,10 @@ initial begin
 	#32
 	reset = 0;
 	#1000000
-	rewind_usart = 1;
-	#63
-	rewind_usart = 0;
-	#71760
+//	rewind_usart = 1;
+//	#63
+//	rewind_usart = 0;
+//	#717600
 	$stop;
 	$finish;
 end
