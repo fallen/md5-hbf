@@ -139,7 +139,7 @@ begin
 `ifdef SIMULATION
 									$display("MD5 HASH FOUND");
 `endif
-									tmp <= m_in[64:71];
+									tmp <= m_in[120:127];
 								end
 							else
 								begin
@@ -187,12 +187,12 @@ reg	[0:127] cleartext;
 					if (show_result_count == 4'd0)
 					begin
 						tmp2 <= tmp;
-						cleartext <= { 56'b0, m_in[72:127], tmp };
+						cleartext <= { 56'b0, tmp, m_in[64:119] }; 
 						bytetosend <= tmp;
 					end
 					else
 					begin
-						cleartext <= { 56'b0 , cleartext[72:127] , tmp2 };
+						cleartext <= { 56'b0, tmp2, cleartext[64:119] };
 						bytetosend <= tmp2;
 					end
 					send <= 1'b1;
@@ -206,7 +206,7 @@ reg	[0:127] cleartext;
 				end 	
 				if (send)
 				begin
-					tmp2 <= cleartext[64:71];
+					tmp2 <= cleartext[120:127];
 					send <= 1'b0;
 				end
 			end
