@@ -1,4 +1,4 @@
-md5 hardware brutforcer IP core
+md5 hardware bruteforcer IP core
 
 (c) Yann Sionneau <yann@minet.net>
 (c) Guillaume Rose <mrfreeze@minet.net>
@@ -9,8 +9,18 @@ Synthesis :
 
 It has been synthetized successfully for Spartan-3A XC3S400A
 on the AVNET Spartan-3A fpga dev board.
-usart output still need to be debuged to get it work.
+usart output works and shows the cleartext password when bruteforcing reveals a md5 hash collision.
 
 Simulation : 
 
 it has been tested using iverilog (vvp) and gtkwave
+
+More information : 
+
+This design compares a given md5 hash with the hash of all alpha numeric strings of length equal to 8.
+At the moment the hash is hardcoded in the verilog design code.
+
+Actually, 64 characters are tested for each byte of the 8-byte string.
+Those characters are : a to z, A to Z, 0 to 9, '!' and '.'
+They can be easily changed by editing the file named "ram.data", each line corresponds to the hexadecimal representation of an ascii character.
+Those characters are put in blockram to access them quickly and easily inside the FPGA chip.
