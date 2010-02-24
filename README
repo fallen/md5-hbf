@@ -11,6 +11,14 @@ It has been synthetized successfully for Spartan-3A XC3S400A
 on the AVNET Spartan-3A fpga dev board.
 usart output works and shows the cleartext password when bruteforcing reveals a md5 hash collision.
 
+HOW-TO Synthetize ?
+
+	1°) Install ISE Webpack from xilinx website (free of charge)
+	2°) type in your terminal : $source /path/to/xilinx/dir/settings32.sh
+	3°) go to md5-hbf base directory
+	4°) type ./build_bitstream.sh
+	5°) drink some (a lot of) coffee, cause you'll have to wait 'till the synthesis is done.
+
 Simulation : 
 
 it has been tested using iverilog (vvp) and gtkwave
