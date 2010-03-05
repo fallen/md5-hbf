@@ -4,11 +4,13 @@ md5 hardware bruteforcer IP core
 (c) Guillaume Rose <mrfreeze@minet.net>
 
 we use the pancham MD5 IP core made by Swapnajit Mittra <http://www.angelfire.com/ca/verilog>
+we plan on changing the MD5 IP core, since this one limits the design speed to 38 MHz which is slow.
+however a md5 hash is computed each 68 clock rising edge, which is pretty fast (in particular compared to implentations in software using modern CPU).
 
 Synthesis : 
 
-It has been synthetized successfully for Spartan-3A XC3S400A
-on the AVNET Spartan-3A fpga dev board.
+It has been synthetized successfully for Spartan-3A XC3S400A and on Spartan-3AN XC3S700AN
+on the AVNET Spartan-3A fpga dev board and the Xilinx Spartan-3AN Starter Kit respectively.
 usart output works and shows the cleartext password when bruteforcing reveals a md5 hash collision.
 
 HOW-TO Synthetize ?
