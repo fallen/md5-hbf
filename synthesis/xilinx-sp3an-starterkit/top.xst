@@ -1,0 +1,10 @@
+run
+-ifn top.prj
+-top top
+-ifmt MIXED
+-opt_mode AREA
+-opt_level 2
+-ofn top.ngc
+-p xc3s700an-ft256-4
+-d xilinx-sp3an-starterkit
+-register_balancing yes

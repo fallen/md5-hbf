@@ -1,0 +1,10 @@
+run
+-ifn top.prj
+-top top
+-ifmt MIXED
+-opt_mode AREA
+-opt_level 2
+-ofn top.ngc
+-p xc3s400a-ft256-4
+-d avnet-sp3aeval
+-register_balancing yes
