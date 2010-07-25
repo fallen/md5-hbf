@@ -112,8 +112,8 @@ NET led3                LOC = C15   | IOSTANDARD = LVCMOS33               ;   # 
 ##   Net names UART_RXD and UART_TXD on the schematic are named in terms of the PSoC connection.
 ##   Net UART_RXD is an output from the FPGA and an input to the PSoC.  Connect to FPGA Tx.
 ##   Net UART_TXD is an input to the FPGA and an output from the PSoC.  Connect to FPGA Rxx.
-NET UART_RXD            LOC = B3    | IOSTANDARD = LVCMOS33               ;   # UART_RXD
-NET UART_TXD            LOC = A3    | IOSTANDARD = LVCMOS33               ;   # UART_TXD
+#NET UART_RXD            LOC = B3    | IOSTANDARD = LVCMOS33               ;   # UART_RXD
+#NET UART_TXD            LOC = A3    | IOSTANDARD = LVCMOS33               ;   # UART_TXD
 #
 ## GPIO
 #NET BANK0_IO01          LOC = A14   | IOSTANDARD = LVCMOS33               ;   # BANK0_IO1 
@@ -129,9 +129,9 @@ NET UART_TXD            LOC = A3    | IOSTANDARD = LVCMOS33               ;   # 
 #NET BANK0_IO11          LOC = A11   | IOSTANDARD = LVCMOS33               ;   # BANK0_IO11 
 #NET BANK0_IO12          LOC = C11   | IOSTANDARD = LVCMOS33               ;   # BANK0_IO12 
 #NET BANK0_IO13          LOC = A10   | IOSTANDARD = LVCMOS33               ;   # BANK0_IO13 
-#NET BANK0_IO14          LOC = D10   | IOSTANDARD = LVCMOS33               ;   # BANK0_IO14 
+NET UART_TXD          LOC = D10   | IOSTANDARD = LVCMOS33               ;   # BANK0_IO14 
 #NET BANK0_IO15          LOC = A9    | IOSTANDARD = LVCMOS33               ;   # BANK0_IO15
-#NET BANK0_IO16          LOC = E10   | IOSTANDARD = LVCMOS33               ;   # BANK0_IO16
+NET UART_RXD          LOC = E10   | IOSTANDARD = LVCMOS33               ;   # BANK0_IO16
 #NET BANK0_IO17          LOC = C9    | IOSTANDARD = LVCMOS33               ;   # BANK0_IO17
 #NET BANK0_IO18          LOC = D9    | IOSTANDARD = LVCMOS33               ;   # BANK0_IO18
 #NET BANK0_IO19          LOC = A8    | IOSTANDARD = LVCMOS33               ;   # BANK0_IO19
