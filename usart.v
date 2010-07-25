@@ -1,4 +1,4 @@
-module usart(input clock, input reset, output tx_led, input [7:0] bytetosend, input send, output sent, output tx);
+module usart(input clock, input reset, output tx_led, input [7:0] bytetosend, input send, output sent, output tx, input rx);
 
 	reg	[15:0] fsm_clk_count = 16'b0;
 	wire	fsm_clk;
@@ -107,5 +107,26 @@ module usart(input clock, input reset, output tx_led, input [7:0] bytetosend, in
 				endcase
 			end
 	end
+
+/*	assign recv = (start_bit_received & ~recv_finished);
+
+	always @(negedge rx)
+	begin
+		if (~recv)
+			start_bit_received <= start_bit_received;
+	end
+
+	always @(posedge clock)
+	begin
+		if (reset)
+		begin
+			state <= IDLE;
+		end
+		else
+			if (recv)
+				
+
+	end
+*/
 
 endmodule
