@@ -1,3 +1,5 @@
+`define CLOCK_FREQUENCY 16000000
+
 module top(input rewind_usart, output reset_led, input clock, input reset, output led, output led2, output led3, input UART_TXD, output UART_RXD);
 
 reg reset_sync;
@@ -9,7 +11,7 @@ begin
 	rewind_usart_sync <= rewind_usart;
 end
 
-generator g1 (clock, reset_sync, led, led3, UART_RXD, rewind_usart_sync);
+generator #(.clock_freq(`CLOCK_FREQUENCY) ) g1 (clock, reset_sync, led, led3, UART_RXD, rewind_usart_sync);
 
 assign led2 = UART_TXD;
 assign reset_led = reset_sync;
