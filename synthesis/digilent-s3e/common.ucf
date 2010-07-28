@@ -1,0 +1,14 @@
+NET "clock" LOC = "C9" | IOSTANDARD = LVCMOS33;
+#NET "clock" PERIOD = 20.0ns HIGH 40%;
+#In facts the design fail at 20ns; maximum 29.058ns with speed optimisation
+#Maximum 29.928ns balanced mode
+#But it seems to work :)
+
+NET "reset" LOC = "D18" | IOSTANDARD = LVTTL | PULLDOWN; # BUTTON WEST
+NET "rewind_usart" LOC = "V4" | IOSTANDARD = LVTTL | PULLDOWN; # BUTTON NORTH
+NET "led" LOC = "F12" | IOSTANDARD = LVTTL | SLEW = SLOW | DRIVE = 8; # LED0
+NET "led2" LOC = "E12" | IOSTANDARD = LVTTL | SLEW = SLOW | DRIVE = 8; # LED1
+NET "led3" LOC = "E11" | IOSTANDARD = LVTTL | SLEW = SLOW | DRIVE = 8; # LED2
+
+NET "UART_RXD" LOC = "M14" | IOSTANDARD = LVCMOS33 | DRIVE = 8 | SLEW = SLOW;
+NET "UART_TXD" LOC = "R7" | IOSTANDARD = LVCMOS33;
