@@ -1,0 +1,3 @@
+Remark about speed:
+ - ISE tells that the maximum limit of this design for spartan 3e is about 38MH 
+but it seems to work well with a 50MHz clock !
