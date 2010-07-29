@@ -1,0 +1,37 @@
+NET "clock" LOC = AJ15;
+NET "clock" IOSTANDARD = LVCMOS25;
+
+NET "clock" TNM_NET = "clock";
+TIMESPEC "ts_clock" = PERIOD "clock" 10.00 ns HIGH 50 %;
+
+NET "reset" LOC = "AG5"; #PB_ENTER
+NET "reset" IOSTANDARD = LVTTL;
+
+NET "rewind_usart" LOC = "AH1"; #PB_LEFT
+NET "rewind_usart" IOSTANDARD = LVTTL;
+
+NET "reset_led" LOC = "AC4";
+NET "led" LOC = "AC3";
+NET "led2" LOC = "AA6";
+NET "led3" LOC = "AA5";
+NET "reset_led" IOSTANDARD = LVTTL;
+NET "led" IOSTANDARD = LVTTL;
+NET "led2" IOSTANDARD = LVTTL;
+NET "led3" IOSTANDARD = LVTTL;
+NET "reset_led" DRIVE = 12;
+NET "led" DRIVE = 12;
+NET "led2" DRIVE = 12;
+NET "led3" DRIVE = 12;
+NET "reset_led" SLEW = SLOW;
+NET "led" SLEW = SLOW;
+NET "led2" SLEW = SLOW;
+NET "led3" SLEW = SLOW;
+
+NET "UART_RXD" LOC = "AE7"; #TX In facts
+NET "UART_TXD" LOC = "AJ8"; #RX In facts
+
+NET "UART_TXD" IOSTANDARD = LVCMOS25;
+NET "UART_RXD" IOSTANDARD = LVCMOS25;
+
+NET "UART_RXD" DRIVE = 8;
+NET "UART_RXD" SLEW = SLOW;
