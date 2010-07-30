@@ -7,6 +7,8 @@ we use the pancham MD5 IP core made by Swapnajit Mittra <http://www.angelfire.co
 we plan on changing the MD5 IP core, since this one limits the design speed to 38 MHz which is slow.
 however a md5 hash is computed each 68 clock rising edge, which is pretty fast (in particular compared to implentations in software using modern CPU).
 
+Update (07-2010): The design can run at 50MHz on a spartan 3E 500K gate.
+
 Synthesis : 
 
 It has been synthetized successfully for Spartan-3A XC3S400A and on Spartan-3AN XC3S700AN

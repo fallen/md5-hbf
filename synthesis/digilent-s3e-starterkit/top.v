@@ -1,4 +1,4 @@
-`define CLOCK_FREQUENCY 50000000
+`define CLOCK_FREQUENCY 60000000
 
 module top(input rewind_usart, output reset_led, input clock, input reset, output led, output led2, output led3, input UART_TXD, output UART_RXD);
 
@@ -10,8 +10,8 @@ wire clk0_buf;
 
 DCM #(
 	.CLKDV_DIVIDE(2),
-	.CLKFX_DIVIDE(10),
-	.CLKFX_MULTIPLY(10),
+	.CLKFX_DIVIDE(2),
+	.CLKFX_MULTIPLY(2),
 	.CLKIN_DIVIDE_BY_2("FALSE"),
 	.CLKIN_PERIOD(20.0),
 	.CLKOUT_PHASE_SHIFT("NONE"),
